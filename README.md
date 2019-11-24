@@ -8,7 +8,7 @@ for time formatting
 - TO USE THE APP
   - Open the Java script file in VSS Code
   - Open a new terminal 
-  - Make sure you've CDed into the directory the files are located in
+  - Make sure you have node.js installed and that you've CDed into the directory the files are located in
   - type the following code into the terminal (excluding quotation marks).
   
       node liri.js "type of search" "your search"
