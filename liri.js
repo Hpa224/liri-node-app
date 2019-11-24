@@ -7,7 +7,7 @@ let moment = require('moment');
 let axios = require("axios");
 let fs = require("fs");
 let type = process.argv[2];
-let search1 = process.argv.slice(3);
+let search = process.argv.slice(3);
 
 let bandsearch = () => {
 
@@ -36,10 +36,28 @@ let bandsearch = () => {
 
 function spotifysearch() {
 
+    if (!search) {
+        search = "The Sign"
+        }
+
     spotify
-        .search({ type: 'track', query: search1})
+        .search({ type: 'track', query: search})
         .then(function(response) {
-            console.log(response);
+
+            let object = response.tracks.items
+            // console.log(object);
+
+            for (let i = 0; i < 20; i++) {
+
+                let song = `
+                Artists: ${object[i].artists[0].name}
+                Song: ${object[i].name}
+                Preview: ${object[i].preview_url}
+                Album: ${object[i].album.name}
+                `
+                console.log(song)
+                }
+
             })
         .catch(function(err) {
             console.log(err);
@@ -50,7 +68,7 @@ let moviesearch = () => {
 
     if (!search) {
         search= "MR. Nobody"
-        }
+        };
 
     let query = "https://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
 
@@ -58,10 +76,10 @@ let moviesearch = () => {
 
     axios.get(query).then(
         function(response) {
-    
+
         let object = response.data;
         // console.log(object)
-        
+
         let movie= `
         Title: ${object.Title}
         Year Released: ${object.Year}
@@ -73,7 +91,7 @@ let moviesearch = () => {
         Starring: ${object.Actors}   
         `
 
-        console.log(movie)
+        console.log(movie);
 
         })
 
@@ -82,12 +100,14 @@ let moviesearch = () => {
 function text() {
 
     fs.readFile("random.txt", "utf8", function(error, data) {
-        if (error) {
+    if (error) {
         return console.log(error);
         }
+
         var array = data.split(',');
         type = array[0]; 
         search= array[1];
+
         })
     }
 
@@ -107,4 +127,4 @@ if (type === "movie-this") {
 
 if (type === "do-what-it-says") {
     text()
-}
+    };
