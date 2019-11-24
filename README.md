@@ -17,3 +17,5 @@ for time formatting
       "concert-this": Returns upcoming events for a band you search.
       "spotify-this-song": Returns info for a song name you search.
       "movie-this": Return info for a movie title you search.
+
+Link to git hub repo: https://github.com/Hpa224/liri-node-app
