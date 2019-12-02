@@ -19,13 +19,14 @@ let bandsearch = () => {
         function(response) {
 
         let object = response.data;
-        // console.log(object)
+        
 
         for (let i = 0; i < object.length; i++) {
+            console.log(moment(response.data[i].datetime).format('MM/DD/YYYY'))
             let venue = `
             Venue: ${object[i].venue.name}
             Location: ${object[i].venue.city}, ${object[i].venue.country}
-            Date: ${response.data[i].datetime}
+            Date: ${moment(response.data[i].datetime).format}
             `
             console.log(venue)
             }
@@ -104,12 +105,23 @@ function text() {
         return console.log(error);
         }
 
-        var array = data.split(',');
+        let array = data.split(',');
         type = array[0]; 
         search= array[1];
+        
+        if (type === "concert-this") {
+            bandsearch()
+            };
 
+        if (type === "spotify-this-song") {
+            spotifysearch()
+            };
+
+        if (type === "movie-this") {
+            moviesearch()
+            }
         })
-    }
+}
 
 
 
